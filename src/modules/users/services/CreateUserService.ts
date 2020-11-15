@@ -20,7 +20,11 @@ class CreateUserService {
     private hashProvider: IHashProvider,
   ) {}
 
-  public async execute({ name, email, password }: IRequest): Promise<User> {
+  public async execute({
+    name,
+    email,
+    password,
+  }: IRequest): Promise<Omit<User, 'password'>> {
     const checkUserExists = await this.usersRepository.findByEmail(email);
 
     if (checkUserExists) {
@@ -35,7 +39,9 @@ class CreateUserService {
       password: hashedPassword,
     });
 
-    return user;
+    const { password: _password, ...createdUser } = user;
+
+    return createdUser;
   }
 }
 

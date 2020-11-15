@@ -14,8 +14,6 @@ export default class SessionsController {
       password,
     });
 
-    const { password: _password, ...userWithoutPassword } = user;
-
-    return response.json({ user: userWithoutPassword, token });
+    return response.json({ user, token });
   }
 }
