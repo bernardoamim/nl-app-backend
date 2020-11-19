@@ -51,9 +51,7 @@ class AuthenticateUserService {
       expiresIn,
     });
 
-    const { password: _password, ...authenticatedUser } = user;
-
-    return { user: authenticatedUser, token };
+    return { user, token };
   }
 }
 
